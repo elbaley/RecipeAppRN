@@ -14,21 +14,25 @@ const GreetingScreen = ({navigation}) => {
     <SafeAreaView style={styles.container}>
       <View style={styles.titleContainer}>
         <Text style={styles.title}>Find great recipes</Text>
+        <Text style={styles.description}>
+          Simple & delicious recipes from all across the world!
+        </Text>
       </View>
-      <Text style={styles.description}>
-        Simple & delicious recipes from all across the world!
-      </Text>
-      <Lottie
-        style={styles.animation}
-        source={require('../assets/cooking.json')}
-        autoPlay
-        loop
-      />
-      <TouchableOpacity
-        onPress={() => navigation.navigate('Home')}
-        style={styles.button}>
-        <Text style={styles.buttonText}>Get Started</Text>
-      </TouchableOpacity>
+      <View style={styles.animationContainer}>
+        <Lottie
+          style={styles.animation}
+          source={require('../assets/cooking.json')}
+          autoPlay
+          loop
+        />
+      </View>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('Home')}
+          style={styles.button}>
+          <Text style={styles.buttonText}>Get Started</Text>
+        </TouchableOpacity>
+      </View>
     </SafeAreaView>
   );
 };
@@ -41,9 +45,10 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   titleContainer: {
-    marginTop: 80,
-    marginLeft: 10,
-    width: '60%',
+    flex: 1,
+    paddingTop: 50,
+    paddingHorizontal: 10,
+    width: '65%',
   },
   title: {
     color: 'white',
@@ -52,13 +57,18 @@ const styles = StyleSheet.create({
   },
   description: {
     color: 'white',
-    marginLeft: 10,
     fontWeight: '200',
     fontSize: 15,
+  },
+  animationContainer: {
+    flex: 2,
   },
   animation: {
     width: Dimensions.get('window').width,
     marginTop: '-2%',
+  },
+  buttonContainer: {
+    flex: 0.5,
   },
   button: {
     backgroundColor: 'white',
@@ -68,7 +78,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 50,
   },
   buttonText: {
     color: '#fd7463',
