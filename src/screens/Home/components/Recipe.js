@@ -1,16 +1,22 @@
 import {StyleSheet, Text, View, Image} from 'react-native';
 import React from 'react';
-import {Heart} from 'iconoir-react-native';
+import {Heart, StarOutline} from 'iconoir-react-native';
 
 const Recipe = () => {
   return (
     <View style={styles.productContainer}>
-      <Image
-        style={styles.productImage}
-        source={{
-          uri: 'https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F19%2F2005%2F07%2F25%2Fhot-cold-chicken-spinach-salad-su-2000.jpg',
-        }}
-      />
+      <View>
+        <Image
+          style={styles.productImage}
+          source={{
+            uri: 'https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F19%2F2005%2F07%2F25%2Fhot-cold-chicken-spinach-salad-su-2000.jpg',
+          }}
+        />
+        <View style={styles.ratingContainer}>
+          <StarOutline height={24} width={24} fill="#ffb800" strokeWidth="0" />
+          <Text style={styles.ratingText}>5.0</Text>
+        </View>
+      </View>
       <View style={styles.productInfoContainer}>
         <View style={styles.leftInfo}>
           <Text style={styles.title}>Spinach Salad</Text>
@@ -64,5 +70,24 @@ const styles = StyleSheet.create({
   heartIcon: {
     // backgroundColor: 'red',
     color: '#c0c4cb',
+  },
+  ratingContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    backgroundColor: 'white',
+    paddingVertical: 3,
+    paddingHorizontal: 10,
+    borderRadius: 10,
+    position: 'absolute',
+    right: '4%',
+    top: '7%',
+    width: 75,
+  },
+  ratingText: {
+    fontSize: 18,
+    fontFamily: 'Poppins',
+    fontWeight: '600',
+    color: '#2a2b2a',
   },
 });
