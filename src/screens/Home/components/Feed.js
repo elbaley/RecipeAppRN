@@ -12,16 +12,24 @@ import Recipe from './Recipe';
 
 const Feed = () => {
   function renderRecipe() {
-    return <Text> 12</Text>;
+    return <Recipe />;
+    return <Text>Testing</Text>;
   }
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.headingContainer}>
-        <Text style={styles.heading}>What do you want to cook today?</Text>
-      </View>
-      {/* <FlatList data={[1, 2, 3]} renderItem={renderRecipe} /> */}
-      <Recipe />
-      <Recipe />
+      <FlatList
+        ListHeaderComponent={() => {
+          return (
+            <View style={styles.headingContainer}>
+              <Text style={styles.heading}>
+                What do you want to cook today?
+              </Text>
+            </View>
+          );
+        }}
+        data={[1, 2, 3]}
+        renderItem={renderRecipe}
+      />
     </SafeAreaView>
   );
 };
@@ -38,8 +46,8 @@ const styles = StyleSheet.create({
     marginHorizontal: '5%',
   },
   heading: {
-    fontSize: 28,
+    fontSize: 24,
     fontFamily: 'Poppins',
-    fontWeight: '500',
+    fontWeight: '600',
   },
 });

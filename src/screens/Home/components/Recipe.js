@@ -22,9 +22,9 @@ const Recipe = () => {
             height={30}
             width={30}
             color="currentColor"
-            strokeWidth="0"
+            strokeWidth="2"
             stroke="#fff"
-            fill={'#e94a4b'}
+            // fill={'#e94a4b'}
           />
         </View>
       </View>
