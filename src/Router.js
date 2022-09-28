@@ -14,7 +14,8 @@ import {Home as HomeIcon, Search as SearchIcon} from 'iconoir-react-native';
 const HomeStack = createNativeStackNavigator();
 function HomeStackScreen() {
   return (
-    <HomeStack.Navigator>
+    <HomeStack.Navigator
+      screenOptions={{presentation: 'card', animation: 'fade'}}>
       <HomeStack.Screen
         name="Feed"
         options={{headerShown: false}}
@@ -22,7 +23,11 @@ function HomeStackScreen() {
       />
       <HomeStack.Screen
         name="RecipeDetail"
-        options={{headerShown: false}}
+        options={{
+          headerShown: false,
+          gestureEnabled: true,
+          fullScreenGestureEnabled: true,
+        }}
         component={RecipeDetail}
       />
     </HomeStack.Navigator>
@@ -78,9 +83,20 @@ const AppStack = createNativeStackNavigator();
 const App = () => {
   return (
     <NavigationContainer>
-      <AppStack.Navigator screenOptions={{headerShown: false}}>
+      <AppStack.Navigator
+        screenOptions={{
+          headerShown: false,
+          gestureEnabled: false,
+          fullScreenGestureEnabled: false,
+        }}>
         <AppStack.Screen name="Greeting" component={GreetingScreen} />
-        <AppStack.Screen name="HomeTabScreen" component={HomeTabScreen} />
+        <AppStack.Screen
+          name="HomeTabScreen"
+          options={{
+            gestureEnabled: true,
+          }}
+          component={HomeTabScreen}
+        />
       </AppStack.Navigator>
     </NavigationContainer>
   );

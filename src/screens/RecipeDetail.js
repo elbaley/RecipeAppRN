@@ -3,12 +3,16 @@ import React from 'react';
 
 const RecipeDetail = () => {
   return (
-    <SafeAreaView>
-      <Text>RecipeDetail</Text>
-    </SafeAreaView>
+    <View style={styles.container}>
+      <Text>RecipeDeftail</Text>
+    </View>
   );
 };
 
 export default RecipeDetail;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: 'red',
+  },
+});

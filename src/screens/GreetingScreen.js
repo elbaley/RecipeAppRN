@@ -57,8 +57,9 @@ const styles = StyleSheet.create({
   },
   description: {
     color: 'white',
-    fontWeight: '200',
+    fontWeight: '300',
     fontSize: 15,
+    fontFamily: 'Poppins',
   },
   animationContainer: {
     flex: 2,
