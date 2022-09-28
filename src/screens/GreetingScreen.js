@@ -28,7 +28,7 @@ const GreetingScreen = ({navigation}) => {
       </View>
       <View style={styles.buttonContainer}>
         <TouchableOpacity
-          onPress={() => navigation.navigate('Home')}
+          onPress={() => navigation.navigate('HomeTabScreen')}
           style={styles.button}>
           <Text style={styles.buttonText}>Get Started</Text>
         </TouchableOpacity>

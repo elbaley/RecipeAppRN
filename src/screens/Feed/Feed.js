@@ -8,11 +8,15 @@ import {
 } from 'react-native';
 import React from 'react';
 import {Heart} from 'iconoir-react-native';
-import Recipe from './Recipe';
-
-const Feed = () => {
+import Recipe from './components/Recipe';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+const Stack = createNativeStackNavigator();
+const RecipeDetail = () => {
+  return <Text>Test</Text>;
+};
+const Feed = ({navigation}) => {
   function renderRecipe() {
-    return <Recipe />;
+    return <Recipe navigate={navigation.navigate} />;
     return <Text>Testing</Text>;
   }
   return (

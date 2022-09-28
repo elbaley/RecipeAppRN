@@ -2,7 +2,7 @@ import {StyleSheet, Text, View, Image} from 'react-native';
 import React from 'react';
 import {Heart, StarOutline} from 'iconoir-react-native';
 
-const Recipe = () => {
+const Recipe = ({navigate}) => {
   return (
     <View style={styles.productContainer}>
       <View>
@@ -19,7 +19,13 @@ const Recipe = () => {
       </View>
       <View style={styles.productInfoContainer}>
         <View style={styles.leftInfo}>
-          <Text style={styles.title}>Spinach Salad</Text>
+          <Text
+            onPress={() => {
+              navigate('RecipeDetail', {id: 123});
+            }}
+            style={styles.title}>
+            Spinach Salad
+          </Text>
           <Text style={styles.calories}>165 cal • 15 min</Text>
         </View>
         <View>
