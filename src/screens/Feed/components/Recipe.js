@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View, Image} from 'react-native';
+import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {Heart, StarOutline} from 'iconoir-react-native';
 
@@ -19,13 +19,13 @@ const Recipe = ({navigate}) => {
       </View>
       <View style={styles.productInfoContainer}>
         <View style={styles.leftInfo}>
-          <Text
+          <TouchableOpacity
             onPress={() => {
               navigate('RecipeDetail', {id: 123});
-            }}
-            style={styles.title}>
-            Spinach Salad
-          </Text>
+            }}>
+            <Text style={styles.title}>Spinach Salad</Text>
+          </TouchableOpacity>
+
           <Text style={styles.calories}>165 cal • 15 min</Text>
         </View>
         <View>
