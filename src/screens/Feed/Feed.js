@@ -1,26 +1,29 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  FlatList,
-  SafeAreaView,
-  Image,
-} from 'react-native';
-import React from 'react';
-import {Heart} from 'iconoir-react-native';
+import {StyleSheet, Text, View, FlatList, SafeAreaView} from 'react-native';
+import React, {useEffect, useState} from 'react';
 import Recipe from './components/Recipe';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-const Stack = createNativeStackNavigator();
-const RecipeDetail = () => {
-  return <Text>Test</Text>;
-};
+import axios from 'axios';
+
 const Feed = ({navigation}) => {
-  function renderRecipe() {
-    return <Recipe navigate={navigation.navigate} />;
+  const [recipes, setRecipes] = useState([]);
+  useEffect(() => {
+    axios
+      .get('https://www.themealdb.com/api/json/v1/1/filter.php?c=Seafood')
+      .then(response => {
+        const {meals} = response.data;
+        setRecipes(meals);
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  }, []);
+  function renderRecipe(recipeData) {
+    const {item} = recipeData;
+    return <Recipe recipe={item} navigate={navigation.navigate} />;
   }
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
+        initialNumToRender={4}
         ListHeaderComponent={() => {
           return (
             <View style={styles.headingContainer}>
@@ -30,7 +33,7 @@ const Feed = ({navigation}) => {
             </View>
           );
         }}
-        data={[1, 2, 3]}
+        data={recipes}
         renderItem={renderRecipe}
       />
     </SafeAreaView>

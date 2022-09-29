@@ -9,10 +9,25 @@ import {
   Linking,
 } from 'react-native';
 
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {ArrowLeft} from 'iconoir-react-native';
+import axios from 'axios';
+const RecipeDetail = ({navigation, route}) => {
+  const {recipeId} = route.params;
+  const [recipe, setRecipe] = useState(null);
+  useEffect(() => {
+    console.log('rendering recipe detail!');
+    axios
+      .get(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${recipeId}`)
+      .then(response => {
+        const {meals} = response.data;
+        setRecipe(meals[0]);
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  }, [recipeId]);
 
-const RecipeDetail = ({navigation}) => {
   return (
     <View style={styles.container}>
       <StatusBar barStyle="light-content" />
@@ -21,7 +36,7 @@ const RecipeDetail = ({navigation}) => {
         <Image
           style={styles.recipeImage}
           source={{
-            uri: 'https://www.themealdb.com/images/media/meals/rvypwy1503069308.jpg',
+            uri: recipe?.strMealThumb,
           }}
         />
         <TouchableOpacity
@@ -39,23 +54,17 @@ const RecipeDetail = ({navigation}) => {
         </TouchableOpacity>
       </View>
       <ScrollView style={styles.recipeContainer}>
-        <Text
+        <Text style={styles.heading}>{recipe?.strMeal}</Text>
+        <Text style={styles.recipe}>{recipe?.strInstructions}</Text>
+        <TouchableOpacity
+          style={styles.watchOnYoutubeBtn}
           onPress={() => {
-            Linking.openURL('https://google.com.tr');
-          }}
-          style={styles.heading}>
-          Recipe
-        </Text>
-        <Text style={styles.recipe}>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia,
-          tempora! Optio, esse. Reiciendis, placeat voluptate. Dolorum sapiente
-          saepe possimus necessitatibus tenetur quam voluptatibus ullam esse
-          magni. Repellat, reiciendis. Sed eligendi hic qui enim exercitationem
-          repudiandae alias, voluptate dignissimos amet laudantium, obcaecati
-          soluta rerum laborum quia quaerat laboriosam eos provident at, facilis
-          magnam vero! Consequatur quis ad magnam iusto laborum possimus tenetur
-          officiis alias ducimus praesentium enim culpa, id cum modi.
-        </Text>
+            Linking.openURL(recipe?.strYoutube);
+          }}>
+          <Text style={{color: 'white', fontSize: 16, fontFamily: 'Poppins'}}>
+            Watch on Youtube
+          </Text>
+        </TouchableOpacity>
       </ScrollView>
     </View>
   );
@@ -74,6 +83,7 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   recipeContainer: {
+    paddingTop: 10,
     flex: 1,
   },
   recipeImage: {
@@ -97,14 +107,19 @@ const styles = StyleSheet.create({
     top: 50,
     left: 10,
   },
-  recipeContainer: {
-    paddingTop: 10,
-    paddingHorizontal: 5,
-  },
   heading: {fontFamily: 'Poppins', fontSize: 24, fontWeight: '600'},
 
   recipe: {
     fontFamily: 'Poppins',
     fontSize: 16,
+  },
+  watchOnYoutubeBtn: {
+    height: 60,
+    marginHorizontal: 25,
+    marginVertical: 25,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'red',
+    borderRadius: 8,
   },
 });

@@ -2,14 +2,15 @@ import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {Heart, StarOutline} from 'iconoir-react-native';
 
-const Recipe = ({navigate}) => {
+const Recipe = ({navigate, recipe}) => {
+  const {idMeal, strMeal, strMealThumb} = recipe;
   return (
     <View style={styles.productContainer}>
       <View>
         <Image
           style={styles.productImage}
           source={{
-            uri: 'https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F19%2F2005%2F07%2F25%2Fhot-cold-chicken-spinach-salad-su-2000.jpg',
+            uri: strMealThumb,
           }}
         />
         <View style={styles.ratingContainer}>
@@ -21,9 +22,9 @@ const Recipe = ({navigate}) => {
         <View style={styles.leftInfo}>
           <TouchableOpacity
             onPress={() => {
-              navigate('RecipeDetail', {id: 123});
+              navigate('RecipeDetail', {recipeId: idMeal});
             }}>
-            <Text style={styles.title}>Spinach Salad</Text>
+            <Text style={styles.title}>{strMeal}</Text>
           </TouchableOpacity>
 
           <Text style={styles.calories}>165 cal • 15 min</Text>
