@@ -91,6 +91,7 @@ const styles = StyleSheet.create({
     top: '7%',
     width: 75,
   },
+  leftInfo: {flex: 1},
   ratingText: {
     fontSize: 18,
     fontFamily: 'Poppins',
