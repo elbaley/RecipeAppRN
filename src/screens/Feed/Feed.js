@@ -17,7 +17,6 @@ const RecipeDetail = () => {
 const Feed = ({navigation}) => {
   function renderRecipe() {
     return <Recipe navigate={navigation.navigate} />;
-    return <Text>Testing</Text>;
   }
   return (
     <SafeAreaView style={styles.container}>
