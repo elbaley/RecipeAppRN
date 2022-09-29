@@ -21,7 +21,7 @@ const RecipeDetail = ({navigation}) => {
         <Image
           style={styles.recipeImage}
           source={{
-            uri: 'https://www.simplyrecipes.com/thmb/f3JfxKJNCxJotr0RqZxCjEQrwxY=/720x0/filters:no_upscale():max_bytes(150000):strip_icc()/Simply-Recipes-Spicy-Coconut-Omelette-LEADS-4-c256167d77724676a9a33c921f5476d5.jpg',
+            uri: 'https://www.themealdb.com/images/media/meals/rvypwy1503069308.jpg',
           }}
         />
         <TouchableOpacity
@@ -78,8 +78,13 @@ const styles = StyleSheet.create({
   },
   recipeImage: {
     height: 350,
-    width: '200%',
-    resizeMode: 'contain',
+    width: '100%',
+    resizeMode: 'cover',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
   },
   backButton: {
     position: 'absolute',
