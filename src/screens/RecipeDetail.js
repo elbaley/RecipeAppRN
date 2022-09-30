@@ -16,7 +16,6 @@ const RecipeDetail = ({navigation, route}) => {
   const {recipeId} = route.params;
   const [recipe, setRecipe] = useState(null);
   useEffect(() => {
-    console.log('rendering recipe detail!');
     axios
       .get(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${recipeId}`)
       .then(response => {
@@ -107,11 +106,17 @@ const styles = StyleSheet.create({
     top: 50,
     left: 10,
   },
-  heading: {fontFamily: 'Poppins', fontSize: 24, fontWeight: '600'},
+  heading: {
+    fontFamily: 'Poppins',
+    fontSize: 24,
+    fontWeight: '600',
+    paddingHorizontal: 5,
+  },
 
   recipe: {
     fontFamily: 'Poppins',
     fontSize: 16,
+    paddingHorizontal: 5,
   },
   watchOnYoutubeBtn: {
     height: 60,
