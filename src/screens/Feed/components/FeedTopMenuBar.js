@@ -1,13 +1,10 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  ScrollView,
-  TouchableOpacity,
-} from 'react-native';
+import {StyleSheet, Text, View, ScrollView} from 'react-native';
 import React from 'react';
+import FeedTopMenuItem from './FeedTopMenuItem';
 
 const FeedTopMenuBar = () => {
+  const categoryList = ['Breakfast', 'Starter', 'Side', 'Beef', 'Chicken'];
+
   return (
     <View style={styles.headingContainer}>
       <Text style={styles.heading}>What do you want to cook today?</Text>
@@ -21,24 +18,9 @@ const FeedTopMenuBar = () => {
           flexDirection: 'row',
         }}
         style={styles.menuContainer}>
-        <TouchableOpacity style={styles.menuItem}>
-          <Text style={styles.menuItemText}>Seafood</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.menuItem}>
-          <Text style={styles.menuItemText}>Seafood</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.menuItem}>
-          <Text style={styles.menuItemText}>Seafood</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.menuItem}>
-          <Text style={styles.menuItemText}>Seafood</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.menuItem}>
-          <Text style={styles.menuItemText}>Seafood</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.menuItem}>
-          <Text style={styles.menuItemText}>Seafood</Text>
-        </TouchableOpacity>
+        {categoryList.map((category, i) => {
+          return <FeedTopMenuItem key={i} categoryName={category} />;
+        })}
       </ScrollView>
     </View>
   );

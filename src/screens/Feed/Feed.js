@@ -1,30 +1,54 @@
-import {StyleSheet, Text, View, FlatList, SafeAreaView} from 'react-native';
+import {StyleSheet, FlatList, SafeAreaView, ScrollView} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import Recipe from './components/Recipe';
 import axios from 'axios';
 import FeedTopMenuBar from './components/FeedTopMenuBar';
+import {useSelector, useDispatch} from 'react-redux';
+import Lottie from 'lottie-react-native';
+
+import {
+  selectCurrentCategory,
+  addRecipes,
+} from '../../features/recipe/recipeSlice';
 const Feed = ({navigation}) => {
-  const [recipes, setRecipes] = useState([]);
+  const dispatch = useDispatch();
+  const currentCategory = useSelector(selectCurrentCategory);
+  const recipes = useSelector(state => state.recipe.recipes);
   useEffect(() => {
     axios
-      .get('https://www.themealdb.com/api/json/v1/1/filter.php?c=Seafood')
+      .get(
+        `https://www.themealdb.com/api/json/v1/1/filter.php?c=${currentCategory}`,
+      )
       .then(response => {
         const {meals} = response.data;
-        setRecipes(meals);
+        dispatch(addRecipes({recipes: meals}));
       })
       .catch(e => {
         console.log(e);
       });
-  }, []);
+  }, [currentCategory]);
   function renderRecipe(recipeData) {
     const {item} = recipeData;
     return <Recipe recipe={item} navigate={navigation.navigate} />;
   }
+
+  function handleEmpty() {
+    return (
+      <Lottie
+        source={require('../../assets/loadingCooking.json')}
+        autoPlay
+        loop
+      />
+    );
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
-        initialNumToRender={4}
+        contentContainerStyle={{flex: 1}}
+        ListEmptyComponent={handleEmpty}
         ListHeaderComponent={FeedTopMenuBar}
+        initialNumToRender={4}
         data={recipes}
         renderItem={renderRecipe}
       />
