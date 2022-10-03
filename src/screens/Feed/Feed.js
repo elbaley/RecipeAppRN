@@ -2,7 +2,7 @@ import {StyleSheet, Text, View, FlatList, SafeAreaView} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import Recipe from './components/Recipe';
 import axios from 'axios';
-
+import FeedTopMenuBar from './components/FeedTopMenuBar';
 const Feed = ({navigation}) => {
   const [recipes, setRecipes] = useState([]);
   useEffect(() => {
@@ -24,15 +24,7 @@ const Feed = ({navigation}) => {
     <SafeAreaView style={styles.container}>
       <FlatList
         initialNumToRender={4}
-        ListHeaderComponent={() => {
-          return (
-            <View style={styles.headingContainer}>
-              <Text style={styles.heading}>
-                What do you want to cook today?
-              </Text>
-            </View>
-          );
-        }}
+        ListHeaderComponent={FeedTopMenuBar}
         data={recipes}
         renderItem={renderRecipe}
       />
