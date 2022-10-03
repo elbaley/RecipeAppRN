@@ -1,13 +1,16 @@
 import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 import React from 'react';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {
   setCurrentCategory,
   clearRecipes,
+  selectCurrentCategory,
 } from '../../../features/recipe/recipeSlice';
 
 const FeedTopMenuItem = ({categoryName}) => {
   const dispatch = useDispatch();
+  const currentCategory = useSelector(selectCurrentCategory);
+  const isActive = currentCategory === categoryName;
 
   return (
     <TouchableOpacity
@@ -17,8 +20,10 @@ const FeedTopMenuItem = ({categoryName}) => {
         //fetch new recipes
         dispatch(setCurrentCategory({category: categoryName}));
       }}
-      style={styles.menuItem}>
-      <Text style={styles.menuItemText}>{categoryName}</Text>
+      style={[styles.menuItem, isActive && styles.activeItem]}>
+      <Text style={[styles.menuItemText, isActive && styles.activeText]}>
+        {categoryName}
+      </Text>
     </TouchableOpacity>
   );
 };
@@ -28,14 +33,20 @@ export default FeedTopMenuItem;
 const styles = StyleSheet.create({
   menuItem: {
     height: 40,
-    backgroundColor: '#93c656',
+    backgroundColor: '#f4f4f4',
     borderRadius: 8,
     padding: 10,
     marginRight: 10,
   },
+  activeItem: {
+    backgroundColor: '#93c656',
+  },
   menuItemText: {
-    color: 'white',
+    color: '#a0a0a0',
     fontFamily: 'Poppins',
     fontWeight: '500',
+  },
+  activeText: {
+    color: 'white',
   },
 });
