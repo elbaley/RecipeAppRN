@@ -1,4 +1,10 @@
-import {StyleSheet, FlatList, SafeAreaView, ScrollView} from 'react-native';
+import {
+  StyleSheet,
+  FlatList,
+  SafeAreaView,
+  ScrollView,
+  Dimensions,
+} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import Recipe from './components/Recipe';
 import axios from 'axios';
@@ -35,6 +41,7 @@ const Feed = ({navigation}) => {
   function handleEmpty() {
     return (
       <Lottie
+        style={{width: Dimensions.get('window').width}}
         source={require('../../assets/loadingCooking.json')}
         autoPlay
         loop
@@ -45,7 +52,6 @@ const Feed = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
-        contentContainerStyle={{flex: 1}}
         ListEmptyComponent={handleEmpty}
         ListHeaderComponent={FeedTopMenuBar}
         initialNumToRender={4}
