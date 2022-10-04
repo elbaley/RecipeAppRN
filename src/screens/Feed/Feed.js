@@ -35,7 +35,7 @@ const Feed = ({navigation}) => {
   }, [currentCategory]);
   function renderRecipe(recipeData) {
     const {item} = recipeData;
-    return <Recipe recipe={item} navigate={navigation.navigate} />;
+    return <Recipe recipe={item} />;
   }
 
   function handleEmpty() {
@@ -54,7 +54,8 @@ const Feed = ({navigation}) => {
       <FlatList
         ListEmptyComponent={handleEmpty}
         ListHeaderComponent={FeedTopMenuBar}
-        initialNumToRender={4}
+        initialNumToRender={2}
+        keyExtractor={item => item.idMeal}
         data={recipes}
         renderItem={renderRecipe}
       />

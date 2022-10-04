@@ -40,7 +40,7 @@ const RecipeDetail = ({navigation, route}) => {
         />
         <TouchableOpacity
           onPress={() => {
-            navigation.goBack();
+            navigation.pop();
           }}
           style={styles.backButton}>
           <ArrowLeft

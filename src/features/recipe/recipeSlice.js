@@ -2,7 +2,7 @@ import {createSlice} from '@reduxjs/toolkit';
 
 const initialState = {
   value: 10,
-  currentCategory: 'Seafood',
+  currentCategory: 'Breakfast',
   recipes: [],
 };
 

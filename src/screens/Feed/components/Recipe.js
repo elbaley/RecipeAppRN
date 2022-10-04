@@ -1,8 +1,10 @@
 import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {Heart, StarOutline} from 'iconoir-react-native';
+import {useNavigation} from '@react-navigation/native';
 
-const Recipe = ({navigate, recipe}) => {
+const Recipe = ({recipe}) => {
+  const navigation = useNavigation();
   const {idMeal, strMeal, strMealThumb} = recipe;
   return (
     <View style={styles.productContainer}>
@@ -22,7 +24,7 @@ const Recipe = ({navigate, recipe}) => {
         <View style={styles.leftInfo}>
           <TouchableOpacity
             onPress={() => {
-              navigate('RecipeDetail', {recipeId: idMeal});
+              navigation.navigate('RecipeDetail', {recipeId: idMeal});
             }}>
             <Text style={styles.title}>{strMeal}</Text>
           </TouchableOpacity>

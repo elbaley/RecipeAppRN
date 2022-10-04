@@ -34,6 +34,29 @@ function HomeStackScreen() {
   );
 }
 
+const SearchStack = createNativeStackNavigator();
+function SearchStackScreen() {
+  return (
+    <SearchStack.Navigator
+      screenOptions={{presentation: 'card', animation: 'fade'}}>
+      <SearchStack.Screen
+        name="Search"
+        options={{headerShown: false}}
+        component={Search}
+      />
+      <SearchStack.Screen
+        name="RecipeDetail"
+        options={{
+          headerShown: false,
+          gestureEnabled: true,
+          fullScreenGestureEnabled: true,
+        }}
+        component={RecipeDetail}
+      />
+    </SearchStack.Navigator>
+  );
+}
+
 const Tab = createBottomTabNavigator();
 function HomeTabScreen() {
   return (
@@ -58,7 +81,7 @@ function HomeTabScreen() {
                 style={{color: focused ? '#fd7463' : '#c0c4cb'}}
               />
             );
-          } else if (route.name === 'Search') {
+          } else if (route.name === 'SearchTab') {
             return (
               <SearchIcon
                 height={30}
@@ -74,7 +97,7 @@ function HomeTabScreen() {
         },
       })}>
       <Tab.Screen name="Home" component={HomeStackScreen} />
-      <Tab.Screen name="Search" component={Search} />
+      <Tab.Screen name="SearchTab" component={SearchStackScreen} />
     </Tab.Navigator>
   );
 }
