@@ -6,11 +6,29 @@ import {
   TextInput,
   FlatList,
 } from 'react-native';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Search as SearchIcon} from 'iconoir-react-native';
 import Recipe from './Feed/components/Recipe';
+import axios from 'axios';
 
 const Search = () => {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+  useEffect(() => {
+    if (searchTerm) {
+      axios
+        .get(
+          `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchTerm}`,
+        )
+        .then(response => {
+          const {meals} = response.data;
+          setSearchResults(meals);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    }
+  }, [searchTerm]);
   function renderRecipe(recipeData) {
     const {item} = recipeData;
     return <Recipe recipe={item} />;
@@ -26,13 +44,15 @@ const Search = () => {
         />
         <TextInput
           style={styles.searchInput}
-          placeholder="Search..."></TextInput>
+          defaultValue={searchTerm}
+          onChangeText={term => {
+            setSearchTerm(term);
+          }}
+          placeholder="Search..."
+        />
       </View>
       {/* Search Results */}
-      <FlatList
-        data={[{idMeal: 52777, strMeal: 'Testing'}, 2, 3]}
-        renderItem={renderRecipe}
-      />
+      <FlatList data={searchResults} renderItem={renderRecipe} />
     </SafeAreaView>
   );
 };
